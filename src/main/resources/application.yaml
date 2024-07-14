@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost/music"
+    username: Mateus
+  jpa: 
+    hibernate:
+      ddl-auto: validate
+    generate:
+      ddl: false
+    properties:
+      hibernate:
+        generate_statistics: true
+        jpa:
+          batch_size: 50
+
+logging:
+  level:
+    root: info
+    org:
+      hibernate:
+        stat: debug 
+        SQL: debug

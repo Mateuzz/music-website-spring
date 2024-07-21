@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class CategoryDTO implements Serializable {
     private long id;
     private int nesting;
-    private Long parent_id;
+    private Long parentID;
     private String name;
     private LinksDTO links;
 
     public CategoryDTO(Long parent_id, long id, int nesting, String name, LinksDTO links) {
-        this.parent_id = parent_id;
+        this.parentID = parent_id;
         this.id = id;
         this.nesting = nesting;
         this.name = name;
@@ -44,12 +44,12 @@ public class CategoryDTO implements Serializable {
         this.links = links;
     }
 
-    public Long getParent_id() {
-        return parent_id;
+    public Long getParentID() {
+        return parentID;
     }
 
-    public void setParent_id(Long parent_id) {
-        this.parent_id = parent_id;
+    public void setParentID(Long parent_id) {
+        this.parentID = parent_id;
     }
 
 }

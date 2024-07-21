@@ -4,7 +4,6 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 import java.net.URI;
-import java.time.Duration;
 
 @Converter(autoApply = true)
 class URIConverter implements AttributeConverter<URI, String> {

@@ -1,22 +1,33 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://localhost/music"
-    username: Mateus
-  jpa: 
-    hibernate:
-      ddl-auto: validate
-    generate:
-      ddl: false
+    url: "jdbc:postgresql://172.18.0.2/music"
+    username: admin
+    password: admin
+
     properties:
       hibernate:
-        generate_statistics: true
+        generate_statistics: false
         jpa:
           batch_size: 50
-
+      jakarta:
+        persistence:
+          schema-generation:
+            # scripts:
+            #   action: create
+            #   create-target: jpa-export.sql
+            #   create-source: metadata
+            
 logging:
   level:
     root: info
     org:
       hibernate:
-        stat: debug 
+        stat: debug
         SQL: debug
+
+# app:
+#   web:
+    # app-uri: http:localhost: 8080
+    # public-html: public
+    # storage-path: public/storage
+    # base-message-source: classpath:messages

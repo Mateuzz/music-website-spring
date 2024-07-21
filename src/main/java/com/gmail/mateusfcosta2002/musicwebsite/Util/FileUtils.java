@@ -11,4 +11,12 @@ public class FileUtils {
         parent.mkdirs();
         return file.createNewFile();
     }
+
+    public static String replaceExtension(String filename, String newExtension) {
+        var extIndex = filename.indexOf('.');
+        if (extIndex != -1) 
+            return filename.substring(0, filename.indexOf('.')) + newExtension;
+
+        return filename + newExtension;
+    }
 }

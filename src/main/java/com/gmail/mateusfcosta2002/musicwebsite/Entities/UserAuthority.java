@@ -1,7 +1,5 @@
 package com.gmail.mateusfcosta2002.musicwebsite.Entities;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.gmail.mateusfcosta2002.musicwebsite.WebProperties;
 
 import jakarta.persistence.EmbeddedId;
@@ -17,7 +15,7 @@ public class UserAuthority extends AbstractEntity<UserAuthorityId> {
     @EmbeddedId 
     private UserAuthorityId id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId("userId")
     private User user;
 

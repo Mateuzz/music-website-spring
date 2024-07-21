@@ -1,13 +1,16 @@
 package com.gmail.mateusfcosta2002.musicwebsite.Entities;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -16,34 +19,45 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "musics")
 public class Music {
-    @Id @GeneratedValue 
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Tag> tags = new HashSet<>();
 
-    @Column(length = 150) 
+    @Column(length = 150, nullable = false) 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Author author;
     
-    @ManyToOne(fetch = FetchType.LAZY) 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) 
     private Category category;
 
-    private int durationInSeconds;
+    private int viewsCount;
+
+    @CreationTimestamp
+    Instant createDate;
+
+    @UpdateTimestamp
+    Instant updateDate;
 
     private String filepath;
 
     public Music() {}
 
-    public Music(String name, Category category, int durationInSeconds, String filepath, Author author, Set<Tag> tags) {
+    public Music(String name, Category category, String filepath, Author author, Set<Tag> tags) {
         this.name = name;
         this.category = category;
-        this.durationInSeconds = durationInSeconds;
         this.filepath = filepath;
         this.tags = tags;
         this.author = author;
+        this.viewsCount = 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return id == ((Music)obj).id;
     }
 
     public long getId() {
@@ -90,20 +104,36 @@ public class Music {
         this.id = id;
     }
 
-    public int getDurationInSeconds() {
-        return durationInSeconds;
-    }
-
-    public void setDurationInSeconds(int durationInSeconds) {
-        this.durationInSeconds = durationInSeconds;
-    }
-
     public Author getAuthor() {
         return author;
     }
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public int getViewsCount() {
+        return viewsCount;
+    }
+
+    public void setViewsCount(int viewsCount) {
+        this.viewsCount = viewsCount;
+    }
+
+    public Instant getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Instant createDate) {
+        this.createDate = createDate;
+    }
+
+    public Instant getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Instant updateDate) {
+        this.updateDate = updateDate;
     }
 
 }

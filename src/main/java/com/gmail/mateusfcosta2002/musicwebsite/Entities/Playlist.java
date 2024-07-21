@@ -7,9 +7,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.util.HashSet;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -18,12 +20,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name= "playlists")
 public class Playlist {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Music> musics = new HashSet<>();
 
+    @Column(length = 150, nullable = false)
     private String name;
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,11 +42,9 @@ public class Playlist {
 
     public Playlist() {}
 
-    public Playlist(Set<Music> musics, String name, User ownerUser, String uriImage) {
-        this.musics = musics;
+    public Playlist(String name, User createdBy) {
         this.name = name;
-        this.createdBy = ownerUser;
-        this.uriImage = uriImage;
+        this.createdBy = createdBy;
     }
 
     public long getId() {

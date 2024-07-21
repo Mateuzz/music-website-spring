@@ -52,7 +52,7 @@ public class SecurityConfiguration {
     }
 
     @Bean 
-    ProviderManager providerManager(PasswordEncoder encoder, AppUserDetailsService appUserDetailsService) {
+    public ProviderManager providerManager(PasswordEncoder encoder, AppUserDetailsService appUserDetailsService) {
         var daoProvider = new DaoAuthenticationProvider(encoder);
         daoProvider.setUserDetailsService(appUserDetailsService);
         var manager = new ProviderManager(daoProvider);

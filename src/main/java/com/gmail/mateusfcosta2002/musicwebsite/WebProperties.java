@@ -11,34 +11,30 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class WebProperties {
-    private URI appUri;
-    private Path publicHtml;
-    private Path storagePath;
+    public final URI APP_URI;
+    public final Path PUBLIC_HTML;
+    public final Path STORAGE_PATH;
 
     public static final String USER_ROLE_PREXIX = "ROLE_";
 
     public WebProperties(Environment env) throws URISyntaxException, IOException {
-        this.appUri = new URI(env.getProperty("app.web.app-uri", "http://localhost:8080"));
-        this.publicHtml = Path.of(env.getProperty("app.web.public-html", "./public"));
-        this.storagePath = Path.of(env.getProperty("app.web.storage-path", publicHtml.resolve("storage").toString()));
+        this.APP_URI = new URI(env.getProperty("app.web.app-uri", "http://localhost:8080"));
+        this.PUBLIC_HTML = Path.of(env.getProperty("app.web.public-html", "./public"));
+        this.STORAGE_PATH = Path.of(env.getProperty("app.web.storage-path", PUBLIC_HTML.resolve("storage").toString()));
 
-        if (!Files.isDirectory(storagePath))
-            Files.createDirectories(storagePath);
+        if (!Files.isDirectory(STORAGE_PATH))
+            Files.createDirectories(STORAGE_PATH);
     }
 
-    public URI getAppUri() {
-        return appUri;
+    public String publicHtmlPath(Path path) {
+        return "/" + PUBLIC_HTML.relativize(path).normalize().toString();
     }
 
-    public String getFilepathRelativeToPublic(Path path) {
-        return "/" + publicHtml.relativize(path).normalize().toString();
+    public URI appURI(String relative) {
+        return APP_URI.resolve(relative);
     }
-
-    public Path getPublicHtml() {
-        return publicHtml;
-    }
-
-    public Path getStoragePath() {
-        return storagePath;
+    
+    public URI appURI(URI relative) {
+        return APP_URI.resolve(relative);
     }
 }

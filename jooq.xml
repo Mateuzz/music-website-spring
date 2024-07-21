@@ -3,9 +3,9 @@
     <!-- Configure the database connection here -->
     <jdbc>
         <driver>org.postgresql.Driver</driver>
-        <url>jdbc:postgresql://localhost/music</url>
-        <user>Mateus</user>
-        <password></password>
+        <url>jdbc:postgresql://0.0.0.0/music</url>
+        <user>admin</user>
+        <password>admin</password>
     </jdbc>
 
     <generator>

@@ -47,129 +47,115 @@ public class MusicsRecord extends UpdatableRecordImpl<MusicsRecord> {
     }
 
     /**
-     * Setter for <code>public.musics.duration_in_seconds</code>.
-     */
-    public void setDurationInSeconds(Integer value) {
-        set(1, value);
-    }
-
-    /**
-     * Getter for <code>public.musics.duration_in_seconds</code>.
-     */
-    public Integer getDurationInSeconds() {
-        return (Integer) get(1);
-    }
-
-    /**
      * Setter for <code>public.musics.views_count</code>.
      */
     public void setViewsCount(Integer value) {
-        set(2, value);
+        set(1, value);
     }
 
     /**
      * Getter for <code>public.musics.views_count</code>.
      */
     public Integer getViewsCount() {
-        return (Integer) get(2);
+        return (Integer) get(1);
     }
 
     /**
      * Setter for <code>public.musics.author_id</code>.
      */
     public void setAuthorId(Long value) {
-        set(3, value);
+        set(2, value);
     }
 
     /**
      * Getter for <code>public.musics.author_id</code>.
      */
     public Long getAuthorId() {
-        return (Long) get(3);
+        return (Long) get(2);
     }
 
     /**
      * Setter for <code>public.musics.category_id</code>.
      */
     public void setCategoryId(Long value) {
-        set(4, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>public.musics.category_id</code>.
      */
     public Long getCategoryId() {
-        return (Long) get(4);
+        return (Long) get(3);
     }
 
     /**
      * Setter for <code>public.musics.create_date</code>.
      */
     public void setCreateDate(OffsetDateTime value) {
-        set(5, value);
+        set(4, value);
     }
 
     /**
      * Getter for <code>public.musics.create_date</code>.
      */
     public OffsetDateTime getCreateDate() {
-        return (OffsetDateTime) get(5);
+        return (OffsetDateTime) get(4);
     }
 
     /**
      * Setter for <code>public.musics.id</code>.
      */
     public void setId(Long value) {
-        set(6, value);
+        set(5, value);
     }
 
     /**
      * Getter for <code>public.musics.id</code>.
      */
     public Long getId() {
-        return (Long) get(6);
+        return (Long) get(5);
     }
 
     /**
      * Setter for <code>public.musics.update_date</code>.
      */
     public void setUpdateDate(OffsetDateTime value) {
-        set(7, value);
+        set(6, value);
     }
 
     /**
      * Getter for <code>public.musics.update_date</code>.
      */
     public OffsetDateTime getUpdateDate() {
-        return (OffsetDateTime) get(7);
+        return (OffsetDateTime) get(6);
     }
 
     /**
      * Setter for <code>public.musics.name</code>.
      */
     public void setName(String value) {
-        set(8, value);
+        set(7, value);
     }
 
     /**
      * Getter for <code>public.musics.name</code>.
      */
     public String getName() {
-        return (String) get(8);
+        return (String) get(7);
     }
 
     /**
      * Setter for <code>public.musics.filepath</code>.
      */
     public void setFilepath(String value) {
-        set(9, value);
+        set(8, value);
     }
 
     /**
      * Getter for <code>public.musics.filepath</code>.
      */
     public String getFilepath() {
-        return (String) get(9);
+        return (String) get(8);
     }
 
     // -------------------------------------------------------------------------
@@ -195,11 +181,10 @@ public class MusicsRecord extends UpdatableRecordImpl<MusicsRecord> {
     /**
      * Create a detached, initialised MusicsRecord
      */
-    public MusicsRecord(Object search, Integer durationInSeconds, Integer viewsCount, Long authorId, Long categoryId, OffsetDateTime createDate, Long id, OffsetDateTime updateDate, String name, String filepath) {
+    public MusicsRecord(Object search, Integer viewsCount, Long authorId, Long categoryId, OffsetDateTime createDate, Long id, OffsetDateTime updateDate, String name, String filepath) {
         super(Musics.MUSICS);
 
         setSearch(search);
-        setDurationInSeconds(durationInSeconds);
         setViewsCount(viewsCount);
         setAuthorId(authorId);
         setCategoryId(categoryId);

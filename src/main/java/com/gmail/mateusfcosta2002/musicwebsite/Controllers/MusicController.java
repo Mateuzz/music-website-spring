@@ -1,5 +1,7 @@
 package com.gmail.mateusfcosta2002.musicwebsite.Controllers;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -113,16 +115,19 @@ public class MusicController {
                 .findById(form.categoryID())
                 .orElseThrow(() -> new NotFoundException("Category with id " + form.categoryID() + " not found"));
 
-        String musicFilename = null;
+        String musicFilepath = null;
+        String originalFilename = form.file().getOriginalFilename();
 
-        try (var inputStream = form.file().getInputStream()) {
-            var originalFilename = form.file().getOriginalFilename();
+        Path uploadedFilepath = storageService.uploadFileRandomName(form.file(), MUSICS_PATH, originalFilename);
+        String uploadedFilepathString = uploadedFilepath.toString();
+
+        try (var inputStream = new BufferedInputStream(new FileInputStream(uploadedFilepathString))) {
             var mediaType = fileDetector.getMediaType(inputStream, originalFilename);
             var fileExtension = FileDetector.getAudioExtension(mediaType);
 
             if (fileExtension == null) {
                 var msg = ctx.getMessage("error.mime.audio",
-                        new Object[] { mediaType.toString(), originalFilename,
+                        new Object[] { originalFilename, mediaType.toString(),
                                 FileDetector.getAcceptedAudioMimeTypes() },
                         LocaleContextHolder.getLocale());
 
@@ -131,11 +136,10 @@ public class MusicController {
                         .body(msg);
             }
 
-            musicFilename = FileUtils.replaceExtension(originalFilename, fileExtension);
-        }
+            musicFilepath = FileUtils.replaceExtension(uploadedFilepathString, fileExtension);
 
-        try (var inputStream = form.file().getInputStream()) {
-            musicFilename = storageService.uploadFileRandomName(inputStream, MUSICS_PATH, musicFilename).toString();
+            if (!musicFilepath.equals(uploadedFilepathString))
+                storageService.move(uploadedFilepath, Path.of(musicFilepath));
         }
 
         Set<Tag> tags = new HashSet<>();
@@ -151,7 +155,7 @@ public class MusicController {
             tags.addAll(existingTags);
         }
 
-        var music = new Music(form.name(), category, musicFilename, author, tags);
+        var music = new Music(form.name(), category, musicFilepath, author, tags);
 
         musicRepository.save(music);
 

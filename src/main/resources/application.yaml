@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://172.18.0.2/music"
+    url: "jdbc:postgresql://0.0.0.0:5432/music"
     username: admin
     password: admin
 
@@ -24,6 +24,10 @@ logging:
       hibernate:
         stat: debug
         SQL: debug
+
+server:
+  error:
+    include-stacktrace: never
 
 # app:
 #   web:

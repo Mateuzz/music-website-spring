@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.gmail.mateusfcosta2002.musicwebsite.WebProperties;
 
 @Component
@@ -33,6 +35,29 @@ public class StorageService {
 
     public Path move(Path src, Path dest, CopyOption... options) throws IOException {
         return Files.move(src, dest, options);
+    }
+
+    public Path uploadFileRandomName(MultipartFile file, Path basepath) throws IOException {
+        var uniqueName = uniqueFilename("");
+        return uploadFile(file, basepath, uniqueName);
+    }
+
+    public Path uploadFileRandomName(MultipartFile file, Path basePath, String baseName) throws IOException {
+        var uniqueName = uniqueFilename(baseName);
+        return uploadFile(file, basePath, uniqueName);
+    }
+
+    public Path uploadFile(MultipartFile file, Path basePath, String filename) throws IOException {
+        var finalPath = storagePath.resolve(basePath).resolve(filename);
+        var parent = finalPath.toFile().getParentFile();
+
+        if (!parent.isDirectory() && !parent.mkdirs()) {
+            throw new IOException("Failed to upload file: Could not create parent path " + parent.toString());
+        }
+
+        file.transferTo(finalPath);
+
+        return finalPath;
     }
 
     public Path uploadFileRandomName(InputStream input, Path basepath) throws IOException {

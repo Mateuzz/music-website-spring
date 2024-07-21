@@ -77,11 +77,6 @@ public class Musics extends TableImpl<MusicsRecord> {
     public final TableField<MusicsRecord, Object> SEARCH = createField(DSL.name("search"), DefaultDataType.getDefaultDataType("\"pg_catalog\".\"tsvector\""), this, "");
 
     /**
-     * The column <code>public.musics.duration_in_seconds</code>.
-     */
-    public final TableField<MusicsRecord, Integer> DURATION_IN_SECONDS = createField(DSL.name("duration_in_seconds"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>public.musics.views_count</code>.
      */
     public final TableField<MusicsRecord, Integer> VIEWS_COUNT = createField(DSL.name("views_count"), SQLDataType.INTEGER.nullable(false), this, "");

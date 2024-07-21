@@ -44,7 +44,7 @@ public class CustomMusicRepositoryImpl implements CustomMusicRepository {
         }
 
         var result = dsl
-            .select(MUSICS.ID, MUSICS.NAME, MUSICS.DURATION_IN_SECONDS, MUSICS.FILEPATH,
+            .select(MUSICS.ID, MUSICS.NAME, MUSICS.FILEPATH,
                     MUSICS_TAGS.TAGS_NAME,
                     AUTHORS.ID, AUTHORS.NAME,
                     CATEGORIES.ID, CATEGORIES.NAME, CATEGORIES.PARENT_ID, CATEGORIES.NESTING, DSL.count().over())

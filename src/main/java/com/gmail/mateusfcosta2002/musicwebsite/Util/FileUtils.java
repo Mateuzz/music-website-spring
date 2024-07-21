@@ -13,9 +13,9 @@ public class FileUtils {
     }
 
     public static String replaceExtension(String filename, String newExtension) {
-        var extIndex = filename.indexOf('.');
+        var extIndex = filename.lastIndexOf('.');
         if (extIndex != -1) 
-            return filename.substring(0, filename.indexOf('.')) + newExtension;
+            return filename.substring(0, extIndex) + newExtension;
 
         return filename + newExtension;
     }

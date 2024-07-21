@@ -39,9 +39,6 @@ public class FileDetector {
     } 
 
     public static String getAudioExtension(MediaType type) {
-        if (type.getType() != "audio")
-            return null;
-        
         return extensionsFromAudioTypes.get(type.getSubtype());
     }
 

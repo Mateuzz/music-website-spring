@@ -3,8 +3,6 @@ package com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto;
 import java.io.Serializable;
 import java.util.Collection;
 
-import com.gmail.mateusfcosta2002.musicwebsite.Entities.Tag;
-
 public class MusicDTO implements Serializable {
     private long id;
     private Collection<TagDTO> tags;
@@ -14,9 +12,9 @@ public class MusicDTO implements Serializable {
     private CategoryDTO category;
     private LinksDTO links;
 
-    public MusicDTO(long id, Collection<TagDTO> tags, String name, AuthorDTO author, CategoryDTO category, String filepath, LinksDTO links) {
+    public MusicDTO(long id, Collection<TagDTO> tags, String name, AuthorDTO author, CategoryDTO category, String htmlFilepath, LinksDTO links) {
         this.id = id;
-        this.filepath = filepath;
+        this.filepath = htmlFilepath;
         this.tags = tags;
         this.name = name;
         this.author = author;

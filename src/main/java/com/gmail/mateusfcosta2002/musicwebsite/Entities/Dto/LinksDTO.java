@@ -1,7 +1,6 @@
 package com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto;
 
 import java.io.Serializable;
-import java.net.URI;
 import java.util.Map;
 import java.util.TreeMap;
 

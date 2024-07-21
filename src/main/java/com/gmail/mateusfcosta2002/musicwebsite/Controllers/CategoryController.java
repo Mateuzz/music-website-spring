@@ -3,7 +3,7 @@ package com.gmail.mateusfcosta2002.musicwebsite.Controllers;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Category;
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto.CategoryDTO;
+import com.gmail.mateusfcosta2002.musicwebsite.Entities.Mappers.CategoryMapper;
 import com.gmail.mateusfcosta2002.musicwebsite.Repositories.CategoryRepository;
 import com.gmail.mateusfcosta2002.musicwebsite.Repositories.CategoryRowRepository;
 import com.gmail.mateusfcosta2002.musicwebsite.Repositories.CategoryRowRepository.CategoryRow;
-import com.gmail.mateusfcosta2002.musicwebsite.Services.CategoryService;
 import com.gmail.mateusfcosta2002.musicwebsite.Web.Exceptions.NotFoundException;
 
 import jakarta.validation.Valid;
@@ -29,14 +29,14 @@ record CategoryPost(@Size(max = 100) String name, Long parent_id) {}
 @RequestMapping("/categories")
 public class CategoryController {
     private CategoryRepository categoryRepository;
-    private CategoryService categoryService;
     private CategoryRowRepository rowRepository;
+    private CategoryMapper categoryMapper;
 
-    public CategoryController(CategoryRepository categoryRepository, CategoryService categoryService,
-            CategoryRowRepository rowRepository) {
+    public CategoryController(CategoryRepository categoryRepository, CategoryRowRepository rowRepository,
+            CategoryMapper categoryMapper) {
         this.categoryRepository = categoryRepository;
-        this.categoryService = categoryService;
         this.rowRepository = rowRepository;
+        this.categoryMapper = categoryMapper;
     }
 
     @GetMapping
@@ -61,13 +61,19 @@ public class CategoryController {
 
         categoryRepository.save(category);
 
-        return categoryService.createDTO(category);
+        return categoryMapper.createDTO(category);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        categoryRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+    @Transactional
+    public CategoryDTO delete(@PathVariable Long id) throws NotFoundException {
+        var category = categoryRepository
+            .findById(id)
+            .orElseThrow(() -> new NotFoundException("Category with id " + id + " not found"));
+
+        categoryRepository.delete(category);
+
+        return categoryMapper.createDTO(category);
     }
 }
 

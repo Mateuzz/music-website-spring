@@ -2,11 +2,13 @@ package com.gmail.mateusfcosta2002.musicwebsite.Repositories;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import jakarta.persistence.EntityManager;
 
-@org.springframework.stereotype.Repository
+@Repository
 public class CategoryRowRepository {
-    public record CategoryRow(long id, int nesting, Long parent_id, String name) {}
+    public record CategoryRow(long id, int nesting, Long parentID, String name) {}
 
     private EntityManager manager;
 
@@ -14,9 +16,10 @@ public class CategoryRowRepository {
         this.manager = manager;
     }
 
+    @SuppressWarnings("unchecked")
     public List<CategoryRow> getAllCategories() {
         return manager
-            .createNativeQuery("select id, nesting, parent_id, name from categories order by parent_id NULLS FIRST", CategoryRow.class)
+            .createNativeQuery("select id, nesting, parent_id as parentID, name from categories order by parentID NULLS FIRST", CategoryRow.class)
             .getResultList();
     }
 }

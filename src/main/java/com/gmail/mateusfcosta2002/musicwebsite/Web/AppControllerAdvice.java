@@ -1,32 +1,31 @@
 package com.gmail.mateusfcosta2002.musicwebsite.Web;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import com.fasterxml.jackson.databind.JsonNode;
+
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.gmail.mateusfcosta2002.musicwebsite.Controllers.Extra.CommonResponses.MessageResponse;
 import com.gmail.mateusfcosta2002.musicwebsite.Web.Exceptions.AppResponseException;
 
 @ControllerAdvice(basePackages = "com.gmail.mateusfcosta2002.musicwebsite.Controllers")
 public class AppControllerAdvice {
-    private ApplicationContext ctx;
     private static final JsonNodeFactory jn = JsonNodeFactory.instance;
+
+    private ApplicationContext ctx;
 
     public AppControllerAdvice(ApplicationContext ctx) {
         this.ctx = ctx;
     }
 
     @ExceptionHandler(AppResponseException.class)
-    public ResponseEntity<String> handleResponseException(AppResponseException e) {
+    public ResponseEntity<MessageResponse> handleResponseException(AppResponseException e) {
         return ResponseEntity
             .status(e.getCode())
-            .body(e.getMessage());
+            .body(new MessageResponse(e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

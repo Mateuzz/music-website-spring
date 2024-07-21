@@ -1,9 +1,9 @@
-package com.gmail.mateusfcosta2002.musicwebsite.Services;
+package com.gmail.mateusfcosta2002.musicwebsite.Entities.Mappers;
 
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Tag;
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto.TagDTO;
 
-public class TagService {
+public class TagMapper {
     public static TagDTO createDTO(Tag tag) {
         return new TagDTO(tag.getName());
     }    

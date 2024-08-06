@@ -21,6 +21,16 @@ public class Sequences {
     public static final Sequence<Long> AUTHORS_SEQ = Internal.createSequence("authors_seq", Public.PUBLIC, SQLDataType.BIGINT.nullable(false), null, 50, null, null, false, null);
 
     /**
+     * The sequence <code>public.categories_seq</code>
+     */
+    public static final Sequence<Long> CATEGORIES_SEQ = Internal.createSequence("categories_seq", Public.PUBLIC, SQLDataType.BIGINT.nullable(false), null, 50, null, null, false, null);
+
+    /**
+     * The sequence <code>public.music_tags_seq</code>
+     */
+    public static final Sequence<Long> MUSIC_TAGS_SEQ = Internal.createSequence("music_tags_seq", Public.PUBLIC, SQLDataType.BIGINT.nullable(false), null, 50, null, null, false, null);
+
+    /**
      * The sequence <code>public.musics_seq</code>
      */
     public static final Sequence<Long> MUSICS_SEQ = Internal.createSequence("musics_seq", Public.PUBLIC, SQLDataType.BIGINT.nullable(false), null, 50, null, null, false, null);

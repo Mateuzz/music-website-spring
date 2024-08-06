@@ -59,32 +59,31 @@ public class MusicController {
     private PaginationService paginationService;
 
     private MusicMapper musicMapper;
-
     private FileDetector fileDetector;
 
     private ApplicationContext ctx;
 
     public MusicController(MusicRepository musicRepository, AuthorRepository authorRepository,
-            CategoryRepository categoryRepository, TagRepository tagRepository, StorageService storageService,
-            PaginationService paginationService, MusicMapper musicMapper, FileDetector fileDetector,
-            ApplicationContext ctx) {
-        this.musicRepository = musicRepository;
-        this.authorRepository = authorRepository;
-        this.categoryRepository = categoryRepository;
-        this.tagRepository = tagRepository;
-        this.storageService = storageService;
-        this.paginationService = paginationService;
-        this.musicMapper = musicMapper;
-        this.fileDetector = fileDetector;
-        this.ctx = ctx;
-    }
+			CategoryRepository categoryRepository, TagRepository tagRepository, StorageService storageService,
+			PaginationService paginationService, MusicMapper musicMapper, FileDetector fileDetector,
+			ApplicationContext ctx) {
+		this.musicRepository = musicRepository;
+		this.authorRepository = authorRepository;
+		this.categoryRepository = categoryRepository;
+		this.tagRepository = tagRepository;
+		this.storageService = storageService;
+		this.paginationService = paginationService;
+		this.musicMapper = musicMapper;
+		this.fileDetector = fileDetector;
+		this.ctx = ctx;
+	}
 
-    @GetMapping
+	@GetMapping
     public MusicPageResponse index(MusicSearchRequest form, HttpServletRequest req) {
         int pageSize = form.pageSize() != null ? form.pageSize() : DEFAULT_PAGE_SIZE;
         MusicOrder order = form.order() != null ? form.order() : DEFAULT_MUSIC_ORDER;
 
-        var musicPageRecords = musicRepository.search(form.search(), pageSize, form.page(), order, form.authorID());
+        var musicPageRecords = musicRepository.search(form.search(), pageSize, form.page(), order, form.authorID(), form.categoryID(), form.tags());
 
         var musicDTOPageResult = musicMapper.createPageDTOFromPageRecords(musicPageRecords);
 

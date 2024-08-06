@@ -9,10 +9,10 @@ import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.Keys;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.Public;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Authors.AuthorsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Categories.CategoriesPath;
+import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicTags.MusicTagsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicsTags.MusicsTagsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Playlists.PlaylistsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.PlaylistsMusics.PlaylistsMusicsPath;
-import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Tags.TagsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.records.MusicsRecord;
 
 import java.time.OffsetDateTime;
@@ -66,17 +66,6 @@ public class Musics extends TableImpl<MusicsRecord> {
     }
 
     /**
-     * @deprecated Unknown data type. If this is a qualified, user-defined type,
-     * it may have been excluded from code generation. If this is a built-in
-     * type, you can define an explicit {@link org.jooq.Binding} to specify how
-     * this type should be handled. Deprecation can be turned off using
-     * {@literal <deprecationOnUnknownTypes/>} in your code generator
-     * configuration.
-     */
-    @Deprecated
-    public final TableField<MusicsRecord, Object> SEARCH = createField(DSL.name("search"), DefaultDataType.getDefaultDataType("\"pg_catalog\".\"tsvector\""), this, "");
-
-    /**
      * The column <code>public.musics.views_count</code>.
      */
     public final TableField<MusicsRecord, Integer> VIEWS_COUNT = createField(DSL.name("views_count"), SQLDataType.INTEGER.nullable(false), this, "");
@@ -115,6 +104,17 @@ public class Musics extends TableImpl<MusicsRecord> {
      * The column <code>public.musics.filepath</code>.
      */
     public final TableField<MusicsRecord, String> FILEPATH = createField(DSL.name("filepath"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * @deprecated Unknown data type. If this is a qualified, user-defined type,
+     * it may have been excluded from code generation. If this is a built-in
+     * type, you can define an explicit {@link org.jooq.Binding} to specify how
+     * this type should be handled. Deprecation can be turned off using
+     * {@literal <deprecationOnUnknownTypes/>} in your code generator
+     * configuration.
+     */
+    @Deprecated
+    public final TableField<MusicsRecord, Object> SEARCH = createField(DSL.name("search"), DefaultDataType.getDefaultDataType("\"pg_catalog\".\"tsvector\""), this, "");
 
     private Musics(Name alias, Table<MusicsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -230,7 +230,7 @@ public class Musics extends TableImpl<MusicsRecord> {
      */
     public MusicsTagsPath musicsTags() {
         if (_musicsTags == null)
-            _musicsTags = new MusicsTagsPath(this, null, Keys.MUSICS_TAGS__FKQ50LFT5MGEJQTJ0MTH63TALPP.getInverseKey());
+            _musicsTags = new MusicsTagsPath(this, null, Keys.MUSICS_TAGS__FKGO2PDEEQN31AUEGJK2B490LE6.getInverseKey());
 
         return _musicsTags;
     }
@@ -249,11 +249,11 @@ public class Musics extends TableImpl<MusicsRecord> {
     }
 
     /**
-     * Get the implicit many-to-many join path to the <code>public.tags</code>
-     * table
+     * Get the implicit many-to-many join path to the
+     * <code>public.music_tags</code> table
      */
-    public TagsPath tags() {
-        return musicsTags().tags();
+    public MusicTagsPath musicTags() {
+        return musicsTags().musicTags();
     }
 
     /**

@@ -11,8 +11,8 @@ public class EntityAggregateMapper {
     @Autowired
     protected LinkMapper linkMapper;
 
-    private List<String> entityAllowedMethods = List.of("GET", "DELETE");
-    private List<String> aggregateAllowedMethods = List.of("GET", "POST");
+    protected List<String> entityAllowedMethods = List.of("GET", "DELETE");
+    protected List<String> aggregateAllowedMethods = List.of("GET", "POST");
 
 	public final URI BASE_URI;
 
@@ -39,6 +39,8 @@ public class EntityAggregateMapper {
     }
 
     public LinksDTO linkDTOEntity(long id) {
+        System.out.println(BASE_URI);
+        System.out.println(BASE_URI.resolve(String.valueOf(id)));
         return linkMapper.withCanonical(BASE_URI.resolve(String.valueOf(id)), entityAllowedMethods);
     }
 

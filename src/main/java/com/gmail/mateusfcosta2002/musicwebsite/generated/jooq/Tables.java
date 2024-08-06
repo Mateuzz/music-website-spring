@@ -7,11 +7,11 @@ package com.gmail.mateusfcosta2002.musicwebsite.generated.jooq;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Authorities;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Authors;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Categories;
+import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicTags;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Musics;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicsTags;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Playlists;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.PlaylistsMusics;
-import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Tags;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Users;
 
 
@@ -37,6 +37,11 @@ public class Tables {
     public static final Categories CATEGORIES = Categories.CATEGORIES;
 
     /**
+     * The table <code>public.music_tags</code>.
+     */
+    public static final MusicTags MUSIC_TAGS = MusicTags.MUSIC_TAGS;
+
+    /**
      * The table <code>public.musics</code>.
      */
     public static final Musics MUSICS = Musics.MUSICS;
@@ -55,11 +60,6 @@ public class Tables {
      * The table <code>public.playlists_musics</code>.
      */
     public static final PlaylistsMusics PLAYLISTS_MUSICS = PlaylistsMusics.PLAYLISTS_MUSICS;
-
-    /**
-     * The table <code>public.tags</code>.
-     */
-    public static final Tags TAGS = Tags.TAGS;
 
     /**
      * The table <code>public.users</code>.

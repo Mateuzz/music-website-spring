@@ -11,7 +11,7 @@ import com.gmail.mateusfcosta2002.musicwebsite.Security.Entities.AppUserDetails;
 @Component
 public class UserMapper extends EntityAggregateMapper {
     public UserMapper() {
-        super(URI.create("playlists"));
+        super(URI.create("users/"));
     }
 
     public UserDTO createDTO(User user) {

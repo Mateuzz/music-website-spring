@@ -7,11 +7,15 @@ import java.util.TreeMap;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public class LinksDTO implements Serializable {
-    public static final String CANONICAL_LINK_NAME = "_canonical";
-    public static final String ROOT_LINK_NAME = "_root";
+    public static final String CANONICAL_LINK_NAME = "canonical";
+    public static final String ROOT_LINK_NAME = "root";
+    public static final String REF_LINK_NAME = "ref";
 
     @JsonValue
-    private Map<String, LinkDTO> links;
+    private Map<String, LinkDTO> _links = new TreeMap<>();
+
+    public LinksDTO() {
+    }
 
     public static LinksDTO withCanonical(LinkDTO link) {
         return new LinksDTO(new TreeMap<>(){{
@@ -26,15 +30,15 @@ public class LinksDTO implements Serializable {
         }});
     }
 
-    public LinksDTO(Map<String, LinkDTO> links) {
-        this.links = links;
+    public LinksDTO(Map<String, LinkDTO> _links) {
+        this._links = _links;
     }
 
-    public Map<String, LinkDTO> getLinks() {
-        return links;
+    public Map<String, LinkDTO> get_links() {
+        return _links;
     }
 
-    public void setLinks(Map<String, LinkDTO> links) {
-        this.links = links;
+    public void set_links(Map<String, LinkDTO> _links) {
+        this._links = _links;
     }
 }

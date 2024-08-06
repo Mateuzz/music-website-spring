@@ -13,7 +13,7 @@ import static com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Cate
 @Component
 public class CategoryMapper extends EntityAggregateMapper {
     public CategoryMapper() {
-        super(URI.create("authors"));
+        super(URI.create("authors/"));
     }
 
     public CategoryDTO createDTO(Category category) {

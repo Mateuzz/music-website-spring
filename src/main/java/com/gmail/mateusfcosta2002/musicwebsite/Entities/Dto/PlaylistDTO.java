@@ -9,5 +9,5 @@ public record PlaylistDTO (
     String uriImage,
     Instant createDate,
     Instant updateDate,
-    LinksDTO links
+    LinksDTO _links
 ) {}

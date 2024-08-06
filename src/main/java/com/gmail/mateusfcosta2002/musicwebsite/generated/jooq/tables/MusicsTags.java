@@ -6,8 +6,8 @@ package com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables;
 
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.Keys;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.Public;
+import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicTags.MusicTagsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Musics.MusicsPath;
-import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Tags.TagsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.records.MusicsTagsRecord;
 
 import java.util.Arrays;
@@ -58,14 +58,14 @@ public class MusicsTags extends TableImpl<MusicsTagsRecord> {
     }
 
     /**
-     * The column <code>public.musics_tags.musics_id</code>.
+     * The column <code>public.musics_tags.music_id</code>.
      */
-    public final TableField<MusicsTagsRecord, Long> MUSICS_ID = createField(DSL.name("musics_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<MusicsTagsRecord, Long> MUSIC_ID = createField(DSL.name("music_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.musics_tags.tags_name</code>.
+     * The column <code>public.musics_tags.tags_id</code>.
      */
-    public final TableField<MusicsTagsRecord, String> TAGS_NAME = createField(DSL.name("tags_name"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+    public final TableField<MusicsTagsRecord, Long> TAGS_ID = createField(DSL.name("tags_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private MusicsTags(Name alias, Table<MusicsTagsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -141,7 +141,7 @@ public class MusicsTags extends TableImpl<MusicsTagsRecord> {
 
     @Override
     public List<ForeignKey<MusicsTagsRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.MUSICS_TAGS__FKQ50LFT5MGEJQTJ0MTH63TALPP, Keys.MUSICS_TAGS__FKODMHVTTRIX1AS8030G35KT6LG);
+        return Arrays.asList(Keys.MUSICS_TAGS__FKGO2PDEEQN31AUEGJK2B490LE6, Keys.MUSICS_TAGS__FK4I4QWSOVXBKRWJFN0UNW5NNIJ);
     }
 
     private transient MusicsPath _musics;
@@ -151,21 +151,21 @@ public class MusicsTags extends TableImpl<MusicsTagsRecord> {
      */
     public MusicsPath musics() {
         if (_musics == null)
-            _musics = new MusicsPath(this, Keys.MUSICS_TAGS__FKQ50LFT5MGEJQTJ0MTH63TALPP, null);
+            _musics = new MusicsPath(this, Keys.MUSICS_TAGS__FKGO2PDEEQN31AUEGJK2B490LE6, null);
 
         return _musics;
     }
 
-    private transient TagsPath _tags;
+    private transient MusicTagsPath _musicTags;
 
     /**
-     * Get the implicit join path to the <code>public.tags</code> table.
+     * Get the implicit join path to the <code>public.music_tags</code> table.
      */
-    public TagsPath tags() {
-        if (_tags == null)
-            _tags = new TagsPath(this, Keys.MUSICS_TAGS__FKODMHVTTRIX1AS8030G35KT6LG, null);
+    public MusicTagsPath musicTags() {
+        if (_musicTags == null)
+            _musicTags = new MusicTagsPath(this, Keys.MUSICS_TAGS__FK4I4QWSOVXBKRWJFN0UNW5NNIJ, null);
 
-        return _tags;
+        return _musicTags;
     }
 
     @Override

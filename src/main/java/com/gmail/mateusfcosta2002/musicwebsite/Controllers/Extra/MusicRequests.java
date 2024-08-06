@@ -19,6 +19,7 @@ public class MusicRequests {
     public record MusicSearchRequest(
             String search,
             Long authorID,
+            Long categoryID,
             MusicOrder order,
             @Size(min = 1) @NotNull int page,
             @Size(max = 100) Integer pageSize,

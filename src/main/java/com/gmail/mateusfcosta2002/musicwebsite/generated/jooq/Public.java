@@ -7,11 +7,11 @@ package com.gmail.mateusfcosta2002.musicwebsite.generated.jooq;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Authorities;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Authors;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Categories;
+import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicTags;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Musics;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicsTags;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Playlists;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.PlaylistsMusics;
-import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Tags;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Users;
 
 import java.util.Arrays;
@@ -52,6 +52,11 @@ public class Public extends SchemaImpl {
     public final Categories CATEGORIES = Categories.CATEGORIES;
 
     /**
+     * The table <code>public.music_tags</code>.
+     */
+    public final MusicTags MUSIC_TAGS = MusicTags.MUSIC_TAGS;
+
+    /**
      * The table <code>public.musics</code>.
      */
     public final Musics MUSICS = Musics.MUSICS;
@@ -70,11 +75,6 @@ public class Public extends SchemaImpl {
      * The table <code>public.playlists_musics</code>.
      */
     public final PlaylistsMusics PLAYLISTS_MUSICS = PlaylistsMusics.PLAYLISTS_MUSICS;
-
-    /**
-     * The table <code>public.tags</code>.
-     */
-    public final Tags TAGS = Tags.TAGS;
 
     /**
      * The table <code>public.users</code>.
@@ -98,6 +98,8 @@ public class Public extends SchemaImpl {
     public final List<Sequence<?>> getSequences() {
         return Arrays.asList(
             Sequences.AUTHORS_SEQ,
+            Sequences.CATEGORIES_SEQ,
+            Sequences.MUSIC_TAGS_SEQ,
             Sequences.MUSICS_SEQ,
             Sequences.PLAYLISTS_SEQ,
             Sequences.USERS_SEQ
@@ -110,11 +112,11 @@ public class Public extends SchemaImpl {
             Authorities.AUTHORITIES,
             Authors.AUTHORS,
             Categories.CATEGORIES,
+            MusicTags.MUSIC_TAGS,
             Musics.MUSICS,
             MusicsTags.MUSICS_TAGS,
             Playlists.PLAYLISTS,
             PlaylistsMusics.PLAYLISTS_MUSICS,
-            Tags.TAGS,
             Users.USERS
         );
     }

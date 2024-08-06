@@ -1,9 +1,10 @@
 package com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
 
-public class MusicDTO implements Serializable {
+public class MusicDTOPlaylistItem implements Serializable {
     private long id;
     private Collection<TagDTO> tags;
     private String name;
@@ -12,14 +13,18 @@ public class MusicDTO implements Serializable {
     private CategoryDTO category;
     private LinksDTO _links;
 
-    public MusicDTO(long id, Collection<TagDTO> tags, String name, AuthorDTO author, CategoryDTO category, String htmlFilepath, LinksDTO _links) {
+    private Instant playlistAddedDate;
+
+    public MusicDTOPlaylistItem(long id, Collection<TagDTO> tags, String name, String filepath, AuthorDTO author,
+            CategoryDTO category, LinksDTO _links, Instant playlistAddedDate) {
         this.id = id;
-        this.filepath = htmlFilepath;
         this.tags = tags;
         this.name = name;
+        this.filepath = filepath;
         this.author = author;
         this.category = category;
         this._links = _links;
+        this.playlistAddedDate = playlistAddedDate;
     }
 
     public long getId() {
@@ -46,6 +51,14 @@ public class MusicDTO implements Serializable {
         this.name = name;
     }
 
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
     public AuthorDTO getAuthor() {
         return author;
     }
@@ -66,16 +79,15 @@ public class MusicDTO implements Serializable {
         return _links;
     }
 
-    public void set_links(LinksDTO _links) {
+    public void set_links (LinksDTO _links) {
         this._links = _links;
     }
 
-    public String getFilepath() {
-        return filepath;
+    public Instant getPlaylistAddedDate() {
+        return playlistAddedDate;
     }
 
-    public void setFilepath(String uri) {
-        this.filepath = uri;
+    public void setPlaylistAddedDate(Instant playlistAddedDate) {
+        this.playlistAddedDate = playlistAddedDate;
     }
-   
 }

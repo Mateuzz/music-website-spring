@@ -18,24 +18,42 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gmail.mateusfcosta2002.musicwebsite.Controllers.Extra.CommonResponses.MessageResponse;
+import com.gmail.mateusfcosta2002.musicwebsite.Controllers.Extra.CommonResponses.Pagination;
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Playlist;
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto.LinksDTO;
+import com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto.MusicDTOPlaylistItem;
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto.PlaylistDTO;
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Mappers.PlaylistMapper;
+import com.gmail.mateusfcosta2002.musicwebsite.Repositories.MusicRepository;
 import com.gmail.mateusfcosta2002.musicwebsite.Repositories.PlaylistRepository;
 import com.gmail.mateusfcosta2002.musicwebsite.Repositories.UserRepository;
+import com.gmail.mateusfcosta2002.musicwebsite.Repositories.CustomMusicRepository.MusicPlaylistOrder;
 import com.gmail.mateusfcosta2002.musicwebsite.Security.Entities.AppUserDetails;
+import com.gmail.mateusfcosta2002.musicwebsite.Services.PaginationService;
 import com.gmail.mateusfcosta2002.musicwebsite.Services.StorageService;
 import com.gmail.mateusfcosta2002.musicwebsite.Web.Exceptions.NotFoundException;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 record IndexResponse(Stream<PlaylistDTO> playlists, LinksDTO links) {
 }
 
+record IndexMusicsResponse(Pagination<MusicDTOPlaylistItem> musics, LinksDTO links) {
+}
+
 record MusicPlaylistPost(long musicID) {
 }
+
+record PlaylistMusicsSearchRequest(
+    String search,
+    MusicPlaylistOrder order,
+    @Size(min = 1) int page,
+    @Size(max = 100) Integer pageSize
+) {
+}
+
 
 record PlaylistPost(
         @NotNull @Size(max = 150) String name,
@@ -45,22 +63,27 @@ record PlaylistPost(
 @RequestMapping("/playlists")
 @RestController
 public class PlaylistController {
+	private static final Path PLAYLIST_BACKGROUND_IMAGES_PATH = Path.of("playlists", "background_images");
+    
     private PlaylistRepository playlistRepository;
     private UserRepository userRepository;
+    private MusicRepository musicRepository;;
 
     private StorageService storageService;
+    private PaginationService paginationService;
 
     private PlaylistMapper playlistMapper;
 
-    private static final Path PLAYLIST_BACKGROUND_IMAGES_PATH = Path.of("playlists", "background_images");
-
     public PlaylistController(PlaylistRepository playlistRepository, UserRepository userRepository,
-            StorageService storageService, PlaylistMapper playlistMapper) {
-        this.playlistRepository = playlistRepository;
-        this.userRepository = userRepository;
-        this.storageService = storageService;
-        this.playlistMapper = playlistMapper;
-    }
+			MusicRepository musicRepository, StorageService storageService, PaginationService paginationService,
+			PlaylistMapper playlistMapper) {
+		this.playlistRepository = playlistRepository;
+		this.userRepository = userRepository;
+		this.musicRepository = musicRepository;
+		this.storageService = storageService;
+		this.paginationService = paginationService;
+		this.playlistMapper = playlistMapper;
+	}
 
     @Transactional(readOnly = true)
     @GetMapping
@@ -142,6 +165,23 @@ public class PlaylistController {
         }
 
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping("/{id}/musics")
+    public IndexMusicsResponse  indexMusics(PlaylistMusicsSearchRequest form, @PathVariable long id, HttpServletRequest req) {
+        int pageSize = form.pageSize() != null ? form.pageSize() : 100;
+        var order = form.order() != null ? form.order() : MusicPlaylistOrder.latest;
+
+        var musicsResult = musicRepository.searchByCategory(form.search(), pageSize, form.page(), order, id);
+
+        var musicsPageDTO = playlistMapper.createPageDTOFromPageRecordsPlaylistItem(musicsResult, id);
+
+        var musicsDTOPagination = paginationService.build(musicsPageDTO, req);
+
+        return new IndexMusicsResponse(
+            musicsDTOPagination,
+            playlistMapper.linkDTOEntityMusicItemsAggregate(id)
+        );
     }
 
     @DeleteMapping("/{id}/musics")

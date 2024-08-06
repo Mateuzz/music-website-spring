@@ -7,14 +7,14 @@ public class CategoryDTO implements Serializable {
     private int nesting;
     private Long parentID;
     private String name;
-    private LinksDTO links;
+    private LinksDTO _links;
 
-    public CategoryDTO(Long parent_id, long id, int nesting, String name, LinksDTO links) {
+    public CategoryDTO(Long parent_id, long id, int nesting, String name, LinksDTO _links) {
         this.parentID = parent_id;
         this.id = id;
         this.nesting = nesting;
         this.name = name;
-        this.links = links;
+        this._links = _links;
     }
 
     public long getId() {
@@ -36,13 +36,13 @@ public class CategoryDTO implements Serializable {
         this.name = name;
     }
 
-    public LinksDTO getLinks() {
-        return links;
-    }
+	public LinksDTO get_links() {
+		return _links;
+	}
 
-    public void setLinks(LinksDTO links) {
-        this.links = links;
-    }
+	public void set_links(LinksDTO _links) {
+		this._links = _links;
+	}
 
     public Long getParentID() {
         return parentID;

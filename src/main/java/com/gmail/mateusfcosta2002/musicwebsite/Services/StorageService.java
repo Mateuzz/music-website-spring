@@ -17,6 +17,7 @@ import com.gmail.mateusfcosta2002.musicwebsite.WebProperties;
 @Component
 public class StorageService {
     private Path storagePath;
+
     public StorageService(WebProperties webProperties) {
         this.storagePath = webProperties.STORAGE_PATH;
     }

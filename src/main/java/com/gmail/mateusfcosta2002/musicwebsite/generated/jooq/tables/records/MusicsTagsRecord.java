@@ -19,31 +19,31 @@ public class MusicsTagsRecord extends UpdatableRecordImpl<MusicsTagsRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.musics_tags.musics_id</code>.
+     * Setter for <code>public.musics_tags.music_id</code>.
      */
-    public void setMusicsId(Long value) {
+    public void setMusicId(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.musics_tags.musics_id</code>.
+     * Getter for <code>public.musics_tags.music_id</code>.
      */
-    public Long getMusicsId() {
+    public Long getMusicId() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>public.musics_tags.tags_name</code>.
+     * Setter for <code>public.musics_tags.tags_id</code>.
      */
-    public void setTagsName(String value) {
+    public void setTagsId(Long value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.musics_tags.tags_name</code>.
+     * Getter for <code>public.musics_tags.tags_id</code>.
      */
-    public String getTagsName() {
-        return (String) get(1);
+    public Long getTagsId() {
+        return (Long) get(1);
     }
 
     // -------------------------------------------------------------------------
@@ -51,7 +51,7 @@ public class MusicsTagsRecord extends UpdatableRecordImpl<MusicsTagsRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Record2<Long, String> key() {
+    public Record2<Long, Long> key() {
         return (Record2) super.key();
     }
 
@@ -69,11 +69,11 @@ public class MusicsTagsRecord extends UpdatableRecordImpl<MusicsTagsRecord> {
     /**
      * Create a detached, initialised MusicsTagsRecord
      */
-    public MusicsTagsRecord(Long musicsId, String tagsName) {
+    public MusicsTagsRecord(Long musicId, Long tagsId) {
         super(MusicsTags.MUSICS_TAGS);
 
-        setMusicsId(musicsId);
-        setTagsName(tagsName);
+        setMusicId(musicId);
+        setTagsId(tagsId);
         resetChangedOnNotNull();
     }
 }

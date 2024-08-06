@@ -6,6 +6,8 @@ package com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.records;
 
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.PlaylistsMusics;
 
+import java.time.OffsetDateTime;
+
 import org.jooq.Record2;
 import org.jooq.impl.UpdatableRecordImpl;
 
@@ -46,6 +48,20 @@ public class PlaylistsMusicsRecord extends UpdatableRecordImpl<PlaylistsMusicsRe
         return (Long) get(1);
     }
 
+    /**
+     * Setter for <code>public.playlists_musics.added_date</code>.
+     */
+    public void setAddedDate(OffsetDateTime value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>public.playlists_musics.added_date</code>.
+     */
+    public OffsetDateTime getAddedDate() {
+        return (OffsetDateTime) get(2);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -69,11 +85,12 @@ public class PlaylistsMusicsRecord extends UpdatableRecordImpl<PlaylistsMusicsRe
     /**
      * Create a detached, initialised PlaylistsMusicsRecord
      */
-    public PlaylistsMusicsRecord(Long musicsId, Long playlistId) {
+    public PlaylistsMusicsRecord(Long musicsId, Long playlistId, OffsetDateTime addedDate) {
         super(PlaylistsMusics.PLAYLISTS_MUSICS);
 
         setMusicsId(musicsId);
         setPlaylistId(playlistId);
+        setAddedDate(addedDate);
         resetChangedOnNotNull();
     }
 }

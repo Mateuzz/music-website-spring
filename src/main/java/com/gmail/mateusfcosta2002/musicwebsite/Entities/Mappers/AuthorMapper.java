@@ -13,7 +13,7 @@ import static com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Auth
 @Component
 public class AuthorMapper extends EntityAggregateMapper {
     public AuthorMapper() {
-        super(URI.create("authors"));
+        super(URI.create("authors/"));
     }
 
     public AuthorDTO createDTO(Author author) {

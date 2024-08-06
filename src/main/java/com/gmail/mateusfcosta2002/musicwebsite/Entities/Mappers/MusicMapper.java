@@ -17,7 +17,7 @@ import com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto.MusicDTO;
 import com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto.TagDTO;
 import com.gmail.mateusfcosta2002.musicwebsite.Repositories.Config.PageResult;
 import static com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Musics.MUSICS;
-import static com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicsTags.MUSICS_TAGS;
+import static com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.MusicTags.MUSIC_TAGS;
 import java.nio.file.Path;
 
 @Component
@@ -27,7 +27,7 @@ public class MusicMapper extends EntityAggregateMapper {
     private CategoryMapper categoryMapper;
 
     public MusicMapper(AuthorMapper authorMapper, WebProperties webProperties, CategoryMapper categoryMapper) {
-        super(URI.create("musics"));
+        super(URI.create("musics/"));
         this.categoryMapper = categoryMapper;
         this.authorMapper = authorMapper;
         this.webProperties = webProperties;
@@ -81,7 +81,8 @@ public class MusicMapper extends EntityAggregateMapper {
                 resultList[i++] = musicDTO;
             }
 
-            var tagName = record.get(MUSICS_TAGS.TAGS_NAME);
+            var tagName = record.get(MUSIC_TAGS.NAME);
+
             if (tagName != null)
                 musicDTO.getTags().add(new TagDTO(tagName));
         }

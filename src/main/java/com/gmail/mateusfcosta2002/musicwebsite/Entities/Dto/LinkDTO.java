@@ -1,6 +1,7 @@
 package com.gmail.mateusfcosta2002.musicwebsite.Entities.Dto;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.Collection;
 
 public class LinkDTO implements Serializable {
@@ -9,6 +10,11 @@ public class LinkDTO implements Serializable {
 
     public LinkDTO(String href, Collection<String> actions) {
         this.href = href;
+        this.actions = actions;
+    }
+
+    public LinkDTO(URI href, Collection<String> actions) {
+        this.href = href.toString();
         this.actions = actions;
     }
 

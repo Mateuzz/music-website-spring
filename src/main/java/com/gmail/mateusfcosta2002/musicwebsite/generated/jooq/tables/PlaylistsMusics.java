@@ -10,6 +10,7 @@ import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Musics.Musi
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.Playlists.PlaylistsPath;
 import com.gmail.mateusfcosta2002.musicwebsite.generated.jooq.tables.records.PlaylistsMusicsRecord;
 
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -66,6 +67,11 @@ public class PlaylistsMusics extends TableImpl<PlaylistsMusicsRecord> {
      * The column <code>public.playlists_musics.playlist_id</code>.
      */
     public final TableField<PlaylistsMusicsRecord, Long> PLAYLIST_ID = createField(DSL.name("playlist_id"), SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * The column <code>public.playlists_musics.added_date</code>.
+     */
+    public final TableField<PlaylistsMusicsRecord, OffsetDateTime> ADDED_DATE = createField(DSL.name("added_date"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.TIMESTAMPWITHTIMEZONE)), this, "");
 
     private PlaylistsMusics(Name alias, Table<PlaylistsMusicsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

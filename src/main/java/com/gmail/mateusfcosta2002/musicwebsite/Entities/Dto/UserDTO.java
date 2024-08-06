@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class UserDTO implements Serializable {
     private long id;
     private String name;
-    private LinksDTO links;
+    private LinksDTO _links;
 
-    public UserDTO(long id, String name, LinksDTO links) {
+    public UserDTO(long id, String name, LinksDTO _links) {
         this.id = id;
         this.name = name;
-        this.links = links;
+        this._links = _links;
     }
 
     public long getId() {
@@ -25,10 +25,12 @@ public class UserDTO implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public LinksDTO getLinks() {
-        return links;
-    }
-    public void setLinks(LinksDTO links) {
-        this.links = links;
-    }
+
+	public LinksDTO get_links() {
+		return _links;
+	}
+
+	public void set_links(LinksDTO _links) {
+		this._links = _links;
+	}
 }

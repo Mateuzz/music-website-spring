@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class AuthorDTO implements Serializable {
     private long id;
     private String name;
-    private LinksDTO links;
+    private LinksDTO _links;
 
-    public AuthorDTO(LinksDTO links, long id, String name) {
-        this.links = links;
+    public AuthorDTO(LinksDTO _links, long id, String name) {
+        this._links = _links;
         this.id = id;
         this.name = name;
     }
@@ -25,10 +25,12 @@ public class AuthorDTO implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public LinksDTO getLinks() {
-        return links;
-    }
-    public void setLinks(LinksDTO links) {
-        this.links = links;
-    }
+
+	public LinksDTO get_links() {
+		return _links;
+	}
+
+	public void set_links(LinksDTO _links) {
+		this._links = _links;
+	}
 }

@@ -1,37 +1,33 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://0.0.0.0:5432/music"
+    url: "jdbc:postgresql://172.18.0.2/music"
     username: admin
     password: admin
-
+  jpa: 
+    hibernate:
+      ddl-auto: none
+    generate:
+      ddl: false
     properties:
       hibernate:
-        generate_statistics: false
+        generate_statistics: true
         jpa:
           batch_size: 50
       jakarta:
         persistence:
           schema-generation:
-            # scripts:
-            #   action: create
-            #   create-target: jpa-export.sql
-            #   create-source: metadata
-            
+            scripts:
+              action: create
+              create-target: jpa-export.sql
+              create-source: metadata
+server:
+  error:
+    include-stacktrace: never
+
 logging:
   level:
     root: info
     org:
       hibernate:
-        stat: debug
+        stat: debug 
         SQL: debug
-
-server:
-  error:
-    include-stacktrace: never
-
-# app:
-#   web:
-    # app-uri: http:localhost: 8080
-    # public-html: public
-    # storage-path: public/storage
-    # base-message-source: classpath:messages
